@@ -68,7 +68,7 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 resource "aws_acm_certificate" "cert" {
   domain_name       = "fugaming.org"
   validation_method = "DNS"
-  provider = "us_east_1"
+  provider = "us-east-1"
   lifecycle {
     create_before_destroy = true
   }
