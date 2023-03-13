@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "fugaming_s3_policy_document" {
 }
 
 resource "aws_s3_bucket_policy" "fugaming_s3_policy" {
-  bucket = "${aws_s3_bucket.blog.id}"
+  bucket = "${aws_s3_bucket.fugaming_org.id}"
   policy = "${data.aws_iam_policy_document.fugaming_s3_policy_document.json}"
 }
 
@@ -70,9 +70,6 @@ resource "aws_acm_certificate" "cert" {
   validation_method = "DNS"
   lifecycle {
     create_before_destroy = true
-  }
-  tags {
-    Name = "fugaming.org"
   }
 }
 output "acm_dns_validation" {
