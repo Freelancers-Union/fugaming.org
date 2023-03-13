@@ -92,9 +92,13 @@ resource "aws_cloudfront_distribution" "fugaming_cf" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  default_root_object = "index.html"
+  default_root_object = "home.html"
 
-  aliases = ["fugaming.org"]
+  aliases = [
+    "join.fugaming.org",
+    "cdn.fugaming.org",
+    "fugaming.org"
+    ]
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
