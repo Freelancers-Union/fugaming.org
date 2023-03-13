@@ -1,0 +1,158 @@
+---
+name: 'Terraform: Apply'
+
+# Reusable workflow - only callable from another workflow.
+on:
+  workflow_call:
+    inputs:
+      tf_version:
+        required: true
+        type: string
+      working_directory:
+        required: true
+        type: string
+      aws_region:
+        required: true
+        type: string
+      # aws_role_assume:
+      #   required: true
+      #   type: string
+      download_runner_lambdas:
+        required: false
+        type: boolean
+        default: false
+      runner_lambda_version:
+        required: false
+        type: string
+      runner_labels:
+        type: string
+        default: '["ubuntu-20.04"]'
+        description: 'Must be JSON format as GHA does not have array type as input'   
+    secrets:
+      aws_access_key_id:
+        required: true
+      aws_secret_access_key:
+        required: true
+      # cache_version:
+      #   required: true
+      # terraform_modules_key:
+      #   required: true
+
+env:
+  TERRAFORM_PLANFILE: terraform.tfplan
+  PLUGIN_CACHE_DIR: ~/.terraform.d/plugin-cache
+
+jobs:
+  terraform-apply:
+    name: Terraform Apply
+    runs-on: ${{ fromJson(inputs.runner_labels) }}  
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Install Node (for GH Runner) 
+        if: contains(${{ fromJson(inputs.runner_labels) }}, "self-hosted")      
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14                    
+
+      # - name: Install SSH keys
+      #   uses: webfactory/ssh-agent@v0.6.0
+      #   with:
+      #     ssh-private-key: |
+      #       ${{ secrets.terraform_modules_key }}
+
+      # - name: Setup Terraform Plugin Cache
+      #   run: |
+      #     echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+      #     mkdir --parents ${{ env.PLUGIN_CACHE_DIR }}
+
+      # - name: Cache Terraform Plugins
+      #   id: plugin-cache
+      #   uses: actions/cache@v3
+      #   continue-on-error: true
+      #   with:
+      #     path: ${{ env.PLUGIN_CACHE_DIR }}
+      #     key: plugin-cache-${{ runner.os }}-version-${{ secrets.cache_version }}-terraform-${{ hashFiles(inputs.working_directory) }}-${{ hashFiles('**/.terraform.lock.hcl') }}
+
+      - name: Setup Terraform Working Dir
+        run: |
+          mkdir --parents ${{ inputs.working_directory }}/.terraform
+
+      # - name: Cache Terraform Working Dir
+      #   id: work-dir-cache
+      #   uses: actions/cache@v3
+      #   continue-on-error: true
+      #   with:
+      #     path: ${{ inputs.working_directory }}/.terraform
+      #     key: working-dir-${{ runner.os }}-version-${{ secrets.cache_version }}-terraform-${{ hashFiles(inputs.working_directory) }}-${{ hashFiles('**/.terraform.lock.hcl') }}
+
+      # - name: Cache Terraform Lambda Dir
+      #   id: lambda-cache
+      #   if: inputs.download_runner_lambdas
+      #   uses: actions/cache@v3
+      #   continue-on-error: true
+      #   with:
+      #     path: |
+      #       ${{ inputs.working_directory }}/lambdas
+      #     key: working-dir-${{ runner.os }}-version-${{ secrets.cache_version }}-terraform-${{ hashFiles(inputs.working_directory) }}-${{ inputs.runner_lambda_version }}
+
+      - name: Download Lambdas
+        if: inputs.download_runner_lambdas && steps.lambda-cache.outputs.cache-hit != 'true'
+        uses: robinraju/release-downloader@v1.6
+        with:
+          repository: philips-labs/terraform-aws-github-runner
+          tag: ${{ inputs.runner_lambda_version }}
+          fileName: "*.zip"
+          out-file-path: ${{ inputs.working_directory }}/lambdas
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ inputs.tf_version }}
+
+      - name: Download Plan File
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.TERRAFORM_PLANFILE }}
+          path: ${{ inputs.working_directory }}
+
+      - name: Download State File
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform.tfstate
+          path: ${{ inputs.working_directory }}/.terraform
+
+      - name: Terraform Init
+        id: init
+        if: steps.work-dir-cache.outputs.cache-hit != 'true' || steps.plugin-cache.outputs.cache-hit != 'true'
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          terraform init
+
+      - name: Terraform Show Plan
+        id: show
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          terraform show -no-color $TERRAFORM_PLANFILE
+
+      - name: Terraform Apply
+        id: apply
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          terraform apply -no-color -auto-approve -lock-timeout=300s ${{ env.TERRAFORM_PLANFILE }}
+
+      # - name: Setup AWS credentials for secrets
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.aws_access_key_id }}
+      #     aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
+      #     aws-region: ${{ inputs.aws_region }}
+      #     # role-to-assume: ${{ inputs.aws_role_assume }}
+      #     # role-duration-seconds: 1800 # 30 mins
+      #     # role-skip-session-tagging: true

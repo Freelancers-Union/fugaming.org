@@ -1,0 +1,183 @@
+---
+name: 'Terraform: Plan'
+
+# Reusable workflow - only callable from another workflow.
+on:
+  workflow_call:
+    inputs:
+      tf_version:
+        required: true
+        type: string
+      working_directory:
+        required: true
+        type: string
+      download_runner_lambdas:
+        required: false
+        type: boolean
+        default: false
+      runner_lambda_version:
+        required: false
+        type: string
+      runner_labels:
+        type: string
+        default: '["ubuntu-20.04"]'
+        description: 'Must be JSON format as GHA does not have array type as input'
+    secrets:
+      aws_access_key_id:
+        required: true
+      aws_secret_access_key:
+        required: true
+      # cache_version:
+      #   required: true
+      # terraform_modules_key:
+      #   required: true
+
+env:
+  TERRAFORM_PLANFILE: terraform.tfplan
+  AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
+  PLUGIN_CACHE_DIR: ~/.terraform.d/plugin-cache
+  TF_WORKING_DIR: .terraform
+
+jobs:
+
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: ${{ fromJson(inputs.runner_labels) }}  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Install Node (for GH self-hosted runner) 
+        if: contains(${{ fromJson(inputs.runner_labels) }}, "self-hosted")
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14          
+
+      # - name: Install SSH keys
+      #   uses: webfactory/ssh-agent@v0.6.0
+      #   with:
+      #     ssh-private-key: |
+      #       ${{ secrets.terraform_modules_key }}
+
+      # - name: Setup Terraform Plugin Cache
+      #   run: |
+      #     echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+      #     mkdir --parents ${{ env.PLUGIN_CACHE_DIR }}
+
+      # - name: Cache Terraform Plugins
+      #   id: plugin-cache
+      #   uses: actions/cache@v3
+      #   continue-on-error: true
+      #   with:
+      #     path: ${{ env.PLUGIN_CACHE_DIR }}
+      #     key: plugin-cache-${{ runner.os }}-version-${{ secrets.cache_version }}-terraform-${{ hashFiles(inputs.working_directory) }}-${{ hashFiles('**/.terraform.lock.hcl') }}
+
+      - name: Setup Terraform Working Dir
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          mkdir --parents .terraform
+
+      # - name: Cache Terraform Working Dir
+      #   id: work-dir-cache
+      #   uses: actions/cache@v3
+      #   continue-on-error: true
+      #   with:
+      #     path: |
+      #       ${{ inputs.working_directory }}/${{ env.TF_WORKING_DIR }}
+      #       !${{ inputs.working_directory }}/${{ env.TF_WORKING_DIR }}/terraform.tfstate
+      #     key: working-dir-${{ runner.os }}-version-${{ secrets.cache_version }}-terraform-${{ hashFiles(inputs.working_directory) }}-${{ hashFiles('**/.terraform.lock.hcl') }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ inputs.tf_version }}
+
+      - name: Terraform Init
+        id: init
+        if: steps.work-dir-cache.outputs.cache-hit != 'true' || steps.plugin-cache.outputs.cache-hit != 'true'
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          terraform init
+
+      - name: Check Dependencies
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          if git ls-files --error-unmatch .terraform.lock.hcl &>/dev/null; then
+            echo ".terraform.lock.hcl *is* under version control"
+          else
+            echo ".terraform.lock.hcl is not under version control"
+            exit 1
+          fi
+
+          if [[ `git status --porcelain --untracked-files=no` ]]; then
+            # changes
+            echo "There are changes to the .terraform.lock.hcl file. Please update versions.tf and .terraform.lock.hcl before retrying. You may need to run 'terraform providers lock -platform=darwin_amd64 -platform=linux_amd64 -platform=darwin_arm64 -platform=windows_amd64'"
+            git diff | cat
+            exit 1
+          else
+            # no changes
+            echo "No dependencies have changed, .terraform.lock.hcl remains unchanged"
+          fi
+
+      # - name: Cache Terraform Lambda Dir
+      #   id: lambda-cache
+      #   if: inputs.download_runner_lambdas
+      #   uses: actions/cache@v3
+      #   continue-on-error: true
+      #   with:
+      #     path: |
+      #       ${{ inputs.working_directory }}/lambdas
+      #     key: working-dir-${{ runner.os }}-version-${{ secrets.cache_version }}-terraform-${{ hashFiles(inputs.working_directory) }}-${{ inputs.runner_lambda_version }}
+
+      - name: Download Lambdas
+        if: inputs.download_runner_lambdas && steps.lambda-cache.outputs.cache-hit != 'true'
+        uses: robinraju/release-downloader@v1.6
+        with:
+          repository: philips-labs/terraform-aws-github-runner
+          tag: ${{ inputs.runner_lambda_version }}
+          fileName: "*.zip"
+          out-file-path: ${{ inputs.working_directory }}/lambdas
+
+      - name: Terraform Validate
+        id: validate
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          terraform plan -lock-timeout=300s -out=${{ env.TERRAFORM_PLANFILE }}
+
+      - name: Terraform Targeted Plan
+        if: failure()
+        id: target-plan
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          echo "Terraform plan had errors. Checking for resource targeting file 'targets.txt'"
+          echo "If this one succeeds you will need to re-run"
+          if [[ -f targets.txt ]]
+          then
+            source targets.txt
+            terraform plan -lock-timeout=300s -out=${{ env.TERRAFORM_PLANFILE }}
+          fi
+
+      - name: Upload Plan File
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+            name: ${{ env.TERRAFORM_PLANFILE }}
+            path: ${{ inputs.working_directory }}/${{ env.TERRAFORM_PLANFILE }}
+            retention-days: 90
+
+      - name: Upload State File
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform.tfstate
+          path: ${{ inputs.working_directory }}/${{ env.TF_WORKING_DIR }}/terraform.tfstate
+          retention-days: 90
