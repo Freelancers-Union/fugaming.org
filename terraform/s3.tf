@@ -66,7 +66,7 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 # Create an ACM certificate
 ###########################
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "fugaming.org"
+  domain_name       = "*.fugaming.org"
   validation_method = "DNS"
   provider = "aws.us-east-1"
   lifecycle {
