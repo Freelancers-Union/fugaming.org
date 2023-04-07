@@ -97,6 +97,7 @@ resource "aws_cloudfront_distribution" "fugaming_cf" {
   aliases = [
     "join.fugaming.org",
     "cdn.fugaming.org",
+    "www.fugaming.org",
     "fugaming.org"
     ]
 
