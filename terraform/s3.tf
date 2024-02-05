@@ -100,6 +100,13 @@ resource "aws_cloudfront_distribution" "fugaming_cf" {
     "www.fugaming.org",
     "fugaming.org"
     ]
+  
+  custom_error_response {
+    error_caching_min_ttl = 10
+    error_code            = 404
+    response_code         = 404
+    response_page_path    = "/error.html"
+  }
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
