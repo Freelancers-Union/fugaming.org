@@ -1029,3 +1029,112 @@ strong {
   color: var(--white-color);
   margin-bottom: 20px;
 }
+
+/* Skeleton loader — shown while slow-loading third-party embeds (TeamSpeak, Discord) are pending */
+.skeleton-wrap {
+  position: relative;
+}
+
+.skeleton-loader {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 25%, rgba(255, 255, 255, 0.16) 37%, rgba(255, 255, 255, 0.06) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  pointer-events: none;
+}
+
+.skeleton-loader.is-hidden {
+  display: none;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-loader {
+    animation: none;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/*---------------------------------------
+  SCROLL-REVEAL
+-----------------------------------------*/
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*---------------------------------------
+  HOW TO JOIN — STEP BADGES
+-----------------------------------------*/
+.step-icon-badge {
+  background: var(--primary-color);
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.step-icon-badge img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+}
+
+.step-thumb h5 {
+  margin-bottom: 10px;
+}
+
+.step-thumb p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16px;
+}
+
+/*---------------------------------------
+  MERCH CARDS
+-----------------------------------------*/
+.merch-section-inner {
+  background-color: transparent;
+}
+
+.merch-card {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+}
+
+.merch-card .card-img-top {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.merch-card .text-white-50:hover {
+  color: var(--white-color) !important;
+}
