@@ -3,46 +3,45 @@
 
 
 <head>
-    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="canonical" href="https://fugaming.org/">
+    <meta name="theme-color" content="#0d0d0d">
+    <meta property="og:title" content="FREELANCERS UNION GAMING ORGANIZATION" />
+    <meta property="og:description"
+        content="The Freelancers Union is a multi-game community with multiple activities every week" />
+    <meta property="og:image" content="https://fugaming.org/uploads/pslogo1417p.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fugaming.org" />
+    <meta property="og:site_name" content="Freelancers Union" />
+    <meta name="description"
+        content="The Freelancers Union is a multi-game community with multiple activities every week">
+    <title>Freelancers Union</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="css/templatemo-festava-live.css" rel="stylesheet">
 
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <meta property="og:title" content="FREELANCERS UNION GAMING ORGANIZATION" />
-        <meta property="og:description"
-            content="The Freelancers Union is a multi-game community with multiple activities every week" />
-        <meta property="og:image" content="uploads/pslogo1417p.png" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://fugaming.org" />
-        <meta property="og:site_name" content="Freelancers Union" />
-        <meta name="description"
-            content="The Freelancers Union is a multi-game community with multiple activities every week">
-        <title>Freelancers Union</title>
+    <!-- ANALYTICS -->
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="4be876dc-9d00-42cb-ac6d-6c2d458d0e4f"></script>
 
-        <!-- CSS FILES -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
-
-        <link href="css/templatemo-festava-live.css" rel="stylesheet">
-
-
-        <!-- ANALYTICS -->
-        <script defer src="https://cloud.umami.is/script.js"
-            data-website-id="4be876dc-9d00-42cb-ac6d-6c2d458d0e4f"></script>
-
-
-    </head>
+</head>
 
 <body>
+
+    <a class="visually-hidden-focusable skip-link" href="#section_1">Skip to main content</a>
 
     <main>
 
@@ -51,8 +50,8 @@
 
         <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container">
-                <img src="uploads/pslogo1417p.png" height="50px"></img>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <img src="uploads/pslogo1417p.png" height="50" width="50" alt="" loading="eager">
                     Freelancers Union
                 </a>
 
@@ -84,13 +83,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="https://wiki.fugaming.org/" target="_blank">WiKi
+                            <a class="nav-link click-scroll" href="https://wiki.fugaming.org/" target="_blank" rel="noopener noreferrer">WiKi
                                 <span class="bi-arrow-up-right-square"></span></a>
                         </li>
                     </ul>
 
                     <a href="https://discord.com/invite/axzCaZq" class="btn custom-btn d-lg-block d-none"
-                        target="_blank">Join Us <span class="bi-discord"></span></a>
+                        target="_blank" rel="noopener noreferrer">Join Us <span class="bi-discord"></span></a>
                 </div>
             </div>
         </nav>
@@ -103,7 +102,7 @@
                 <div class="row">
 
                     <div class="col-12 mt-auto mb-5 text-center">
-                        <img src="uploads/pslogo1417p.png" width="30%"></img>
+                        <img src="uploads/pslogo1417p.png" width="30%" alt="Freelancers Union logo" loading="eager" fetchpriority="high">
                         <h1 class="text-white mb-5">Freelancers Union</h1>
 
                         <small>The Serious Community for the Casual Gamer</small>
@@ -124,7 +123,7 @@
                         <div class="location-wrap py-3 py-lg-0">
                             <h5 class="text-white">
                                 <i class="custom-icon bi-people me-2"></i>
-                                <span id="member-count"></span></span>
+                                <span id="member-count"></span>
                             </h5>
                         </div>
 
@@ -134,10 +133,8 @@
 
             <!-- Uncomment this line if you want to add a video background -->
             <div class="video-wrap">
-                <video autoplay="" loop="" muted="" class="custom-video" poster="">
+                <video autoplay loop muted playsinline aria-hidden="true" class="custom-video">
                     <source src="uploads/background-images/sanctuary_control_center_288.mp4" type="video/mp4">
-
-                    Your browser does not support the video tag.
                 </video>
             </div>
 
@@ -149,7 +146,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
-                        <div class="card bg-dark bg-opacity-75 text-white">
+                        <div class="card bg-dark bg-opacity-75 text-white reveal">
                             <div class="card-body">
                                 <h2 class="mb-4">About Freelancers Union</h2>
                                 <p>FU is a multi-game community leading players to victory since 2006.</p>
@@ -163,8 +160,8 @@
                     </div>
 
                     <div class="col-lg-6 col-12">
-                        <div class="about-text-wrap">
-                            <img src="uploads/fu_banner.png" class="about-image img-fluid">
+                        <div class="about-text-wrap reveal" style="transition-delay: 0.1s;">
+                            <img src="uploads/fu_banner.png" class="about-image img-fluid" alt="Freelancers Union banner artwork" loading="lazy">
 
                         </div>
                     </div>
@@ -179,24 +176,73 @@
                 <div class="row justify-content-center">
 
                     <div class="col-12 text-center">
-                        <h2 class="mb-4">Join Us Online</h1>
+                        <h2 class="mb-4">Join Us Online</h2>
+                    </div>
+
+                    <div class="col-12 mb-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 col-12 mb-4 mb-md-0 text-center step-thumb reveal">
+                                <div class="step-icon-badge">
+                                    <img src="uploads/artboard-2.png" alt="" loading="lazy">
+                                </div>
+                                <h5 class="text-white">1. Step In</h5>
+                                <p>Join our Discord and say hello — pick the games you're into.</p>
+                            </div>
+
+                            <div class="col-md-4 col-12 mb-4 mb-md-0 text-center step-thumb reveal"
+                                style="transition-delay: 0.1s;">
+                                <div class="step-icon-badge">
+                                    <img src="uploads/artboard-4.png" alt="" loading="lazy">
+                                </div>
+                                <h5 class="text-white">2. Meet the Squad</h5>
+                                <p>Hop into TeamSpeak or Discord voice during ops nights and get to know the crew.</p>
+                            </div>
+
+                            <div class="col-md-4 col-12 text-center step-thumb reveal" style="transition-delay: 0.2s;">
+                                <div class="step-icon-badge">
+                                    <img src="uploads/artboard-24.png" alt="" loading="lazy">
+                                </div>
+                                <h5 class="text-white">3. Get Set Up</h5>
+                                <p>Check the wiki and mission board, then jump into PlanetSide 2 or Arma 3 ops.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-lg-5 col-12">
-                        <div class="artists-thumb">
+                        <div class="artists-thumb reveal">
                             <div>
                                 <h4>Proudly Sponsored by</h4>
-                                <img src="uploads/ts-logo-horizontal-rgb.png" class="artists-imzage img-fluid">
-                                <div id="ts3viewer_1119671" style="background-color:rgb(55, 59, 61); "> </div>
+                                <img src="uploads/ts-logo-horizontal-rgb.png" class="artists-imzage img-fluid" alt="TeamSpeak" loading="lazy">
+                                <div class="skeleton-wrap" style="min-height: 280px;">
+                                    <div class="skeleton-loader" id="ts3-skeleton"></div>
+                                    <div id="ts3viewer_1119671" style="background-color:rgb(55, 59, 61); "> </div>
+                                </div>
 
-                                <script src="https://static.tsviewer.com/short_expire/js/ts3viewer_loader.js"></script>
                                 <script>
-                                    var ts3v_url_1 = "https://www.tsviewer.com/ts3viewer.php?ID=1119671&text=b3b3b3&text_size=13&text_family=1&text_s_color=ffffff&text_s_weight=bold&text_s_style=normal&text_s_variant=normal&text_s_decoration=underline&text_i_color=ffffff&text_i_weight=normal&text_i_style=normal&text_i_variant=normal&text_i_decoration=none&text_c_color=b3b3b3&text_c_weight=normal&text_c_style=normal&text_c_variant=normal&text_c_decoration=none&text_u_color=ffffff&text_u_weight=normal&text_u_style=normal&text_u_variant=normal&text_u_decoration=none&text_s_color_h=&text_s_weight_h=bold&text_s_style_h=normal&text_s_variant_h=normal&text_s_decoration_h=underline&text_i_color_h=ffffff&text_i_weight_h=bold&text_i_style_h=normal&text_i_variant_h=normal&text_i_decoration_h=none&text_c_color_h=&text_c_weight_h=normal&text_c_style_h=normal&text_c_variant_h=normal&text_c_decoration_h=none&text_u_color_h=&text_u_weight_h=bold&text_u_style_h=normal&text_u_variant_h=normal&text_u_decoration_h=underline&hideEmptyChannels&iconset=default_colored_2014_tsv";
-                                    ts3v_display.init(ts3v_url_1, 1119671, 100);
+                                    function initTs3Viewer() {
+                                        var ts3Target = document.getElementById('ts3viewer_1119671');
+                                        var ts3Skeleton = document.getElementById('ts3-skeleton');
+                                        if (ts3Target && ts3Skeleton && window.MutationObserver) {
+                                            var ts3Observer = new MutationObserver(function () {
+                                                ts3Skeleton.classList.add('is-hidden');
+                                                ts3Observer.disconnect();
+                                            });
+                                            ts3Observer.observe(ts3Target, { childList: true, subtree: true });
+                                            // Fallback: the widget occasionally fails silently — don't leave the skeleton spinning forever.
+                                            setTimeout(function () {
+                                                ts3Skeleton.classList.add('is-hidden');
+                                                ts3Observer.disconnect();
+                                            }, 15000);
+                                        }
+
+                                        var ts3v_url_1 = "https://www.tsviewer.com/ts3viewer.php?ID=1119671&text=b3b3b3&text_size=13&text_family=1&text_s_color=ffffff&text_s_weight=bold&text_s_style=normal&text_s_variant=normal&text_s_decoration=underline&text_i_color=ffffff&text_i_weight=normal&text_i_style=normal&text_i_variant=normal&text_i_decoration=none&text_c_color=b3b3b3&text_c_weight=normal&text_c_style=normal&text_c_variant=normal&text_c_decoration=none&text_u_color=ffffff&text_u_weight=normal&text_u_style=normal&text_u_variant=normal&text_u_decoration=none&text_s_color_h=&text_s_weight_h=bold&text_s_style_h=normal&text_s_variant_h=normal&text_s_decoration_h=underline&text_i_color_h=ffffff&text_i_weight_h=bold&text_i_style_h=normal&text_i_variant_h=normal&text_i_decoration_h=none&text_c_color_h=&text_c_weight_h=normal&text_c_style_h=normal&text_c_variant_h=normal&text_c_decoration_h=none&text_u_color_h=&text_u_weight_h=bold&text_u_style_h=normal&text_u_variant_h=normal&text_u_decoration_h=underline&hideEmptyChannels&iconset=default_colored_2014_tsv";
+                                        ts3v_display.init(ts3v_url_1, 1119671, 100);
+                                    }
                                 </script>
+                                <script src="https://static.tsviewer.com/short_expire/js/ts3viewer_loader.js" async onload="initTs3Viewer()"></script>
                                 <a class="btn custom-btn smoothscroll"
                                     href="https://invite.teamspeak.com/ts.fugaming.org/?password=futs"
-                                    style="margin-top: 30px;" target="_blank">Open TeamSpeak</a>
+                                    style="margin-top: 30px;" target="_blank" rel="noopener noreferrer">Open TeamSpeak</a>
 
                             </div>
 
@@ -204,14 +250,19 @@
                     </div>
 
                     <div class="col-lg-5 col-12">
-                        <div class="artists-thumb">
+                        <div class="artists-thumb reveal" style="transition-delay: 0.1s;">
 
                             <div class="artists-image-wrap">
-                                <iframe src="https://discord.com/widget?id=282514718445273089&theme=dark" width="500"
-                                    height="700" allowtransparency="true" frameborder="0"
-                                    sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                                <div class="skeleton-wrap">
+                                    <div class="skeleton-loader" id="discord-skeleton"></div>
+                                    <iframe src="https://discord.com/widget?id=282514718445273089&theme=dark" width="500"
+                                        height="700" allowtransparency="true" frameborder="0" loading="lazy"
+                                        title="Freelancers Union Discord server widget"
+                                        onload="document.getElementById('discord-skeleton').classList.add('is-hidden')"
+                                        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                                </div>
                                 <a class="btn custom-btn smoothscroll" href="https://discord.com/invite/axzCaZq"
-                                    style="margin-top: 30px;" target="_blank">Join Discord</a>
+                                    style="margin-top: 30px;" target="_blank" rel="noopener noreferrer">Join Discord</a>
 
                             </div>
 
@@ -229,13 +280,13 @@
                 <div class="row justify-content-center">
 
                     <div class="col-12 text-center">
-                        <h2 class="mb-4">Games we play</h1>
+                        <h2 class="mb-4">Games we play</h2>
                     </div>
 
                     <div class="col-lg-5 col-12">
-                        <div class="artists-thumb">
+                        <div class="artists-thumb reveal">
                             <div class="artists-image-wrap">
-                                <img src="uploads/ps2-tol.jpg" class="artists-image img-fluid">
+                                <img src="uploads/ps2-tol.jpg" class="artists-image img-fluid" alt="PlanetSide 2" loading="lazy">
                             </div>
 
                             <div class="artists-hover">
@@ -246,7 +297,7 @@
 
                                 <p>
                                     <strong>Online Members:</strong>
-                                    <span id="outfit-count">0</span></span></h5>
+                                    <span id="outfit-count">0</span>
                                 </p>
 
                                 <p>
@@ -258,16 +309,16 @@
 
                                 <p class="mb-0">
                                     <strong>FISU Stats:</strong>
-                                    <a href="https://ps2.fisu.pw/outfit/?name=fu"><b>[FU]</b></a>
+                                    <a href="https://ps2.fisu.pw/outfit/?name=fu" target="_blank" rel="noopener noreferrer"><b>[FU]</b></a>
                                 </p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-5 col-12">
-                        <div class="artists-thumb">
+                        <div class="artists-thumb reveal" style="transition-delay: 0.1s;">
                             <div class="artists-image-wrap">
-                                <img src="uploads/Arma-3.jpg" class="artists-image img-fluid">
+                                <img src="uploads/Arma-3.jpg" class="artists-image img-fluid" alt="Arma 3" loading="lazy">
                             </div>
 
                             <div class="artists-hover">
@@ -285,13 +336,13 @@
 
                                 <p class="mb-0">
                                     <strong>Mission board:</strong>
-                                    <a href="https://a3.fugaming.org/"><b>a3.fugaming.org</b></a>
+                                    <a href="https://a3.fugaming.org/" target="_blank" rel="noopener noreferrer"><b>a3.fugaming.org</b></a>
                                 </p>
                             </div>
                         </div>
 
-                        <div class="artists-thumb">
-                            <img src="uploads/MixCollage-15-Nov-2024-09-52-PM-2760.jpg" class="artists-image img-fluid">
+                        <div class="artists-thumb reveal" style="transition-delay: 0.2s;">
+                            <img src="uploads/MixCollage-15-Nov-2024-09-52-PM-2760.jpg" class="artists-image img-fluid" alt="Freelancers Union community collage" loading="lazy">
 
                             <div class="artists-hover">
                                 <p>
@@ -317,30 +368,30 @@
                         <div class="text-center mb-4">
                             <a class="btn custom-btn smoothscroll"
                                 href="https://freelancers-union-gaming.myspreadshop.fi/" style="margin-top: 30px;"
-                                target="_blank">Shop Merch</a>
+                                target="_blank" rel="noopener noreferrer">Shop Merch</a>
                         </div>
                         <div>
-                            <section style="background-color: #eee;">
+                            <section class="merch-section-inner">
                                 <div class="container py-5">
                                     <div class="row">
                                         <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-                                            <div class="card">
+                                            <div class="card merch-card reveal">
                                                 <div class="d-flex justify-content-between p-3">
                                                 </div>
                                                 <img src="https://image.spreadshirtmedia.net/image-server/v1/products/T20A1PA5098PT17X205Y35D152008356W12996H12996/views/1,width=650,height=650,appearanceId=1,backgroundColor=ffffff.jpg"
-                                                    class="card-img-top" alt="Hoodie" />
+                                                    class="card-img-top" alt="Hoodie" loading="lazy" />
                                                 <div class="card-body">
                                                     <div class="d-flex justify-content-between">
-                                                        <p class="small"><a href="#!" class="text-muted">Hoodies</a></p>
+                                                        <p class="small"><a href="#!" class="text-white-50">Hoodies</a></p>
                                                     </div>
 
                                                     <div class="d-flex justify-content-between mb-3">
-                                                        <h5 class="text-dark mb-0">€41.99</h5>
+                                                        <h5 class="text-white mb-0">€41.99</h5>
                                                     </div>
                                                     <div class="d-flex justify-content-center mb-3">
                                                         <a class="btn custom-btn smoothscroll"
                                                             href="https://freelancers-union-gaming.myspreadshop.fi/decal+and+black+text-A5ba7da7d22250917078620b5?productType=20&sellable=jw8Vo0vrY3fdarqmM2gm-20-22&appearance=1"
-                                                            style="margin-top: 30px;" target="_blank">Buy</a>
+                                                            style="margin-top: 30px;" target="_blank" rel="noopener noreferrer">Buy</a>
                                                     </div>
 
                                                     <div class="d-flex justify-content-between mb-2">
@@ -356,24 +407,24 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
-                                            <div class="card">
+                                            <div class="card merch-card reveal" style="transition-delay: 0.1s;">
                                                 <div class="d-flex justify-content-between p-3">
                                                 </div>
                                                 <img src="https://image.spreadshirtmedia.net/image-server/v1/products/T812A2PA5886PT17X181Y17D151838212W15469H15469/views/1,width=650,height=650,appearanceId=2,backgroundColor=ffffff.jpg"
-                                                    class="card-img-top" alt="T-shirt" />
+                                                    class="card-img-top" alt="T-shirt" loading="lazy" />
                                                 <div class="card-body">
                                                     <div class="d-flex justify-content-between">
-                                                        <p class="small"><a href="#!" class="text-muted">T-Shirts</a>
+                                                        <p class="small"><a href="#!" class="text-white-50">T-Shirts</a>
                                                         </p>
                                                     </div>
 
                                                     <div class="d-flex justify-content-between mb-3">
-                                                        <h5 class="text-dark mb-0">€26.99</h5>
+                                                        <h5 class="text-white mb-0">€26.99</h5>
                                                     </div>
                                                     <div class="d-flex justify-content-center mb-3">
                                                         <a class="btn custom-btn smoothscroll"
                                                             href="https://freelancers-union-gaming.myspreadshop.fi/decal+and+text-A5ba16763e4474270ac4a6d49?productType=812&sellable=lzb9NAy8Vet37M048Lxr-812-7&appearance=2"
-                                                            style="margin-top: 30px;" target="_blank">Buy</a>
+                                                            style="margin-top: 30px;" target="_blank" rel="noopener noreferrer">Buy</a>
                                                     </div>
 
                                                     <div class="d-flex justify-content-between mb-2">
@@ -389,23 +440,23 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
-                                            <div class="card">
+                                            <div class="card merch-card reveal" style="transition-delay: 0.2s;">
                                                 <div class="d-flex justify-content-between p-3">
                                                 </div>
                                                 <img src="https://image.spreadshirtmedia.net/image-server/v1/products/T2453A2PA6828PT32X184Y16D151563933W8000H8000/views/1,width=650,height=650,appearanceId=2,backgroundColor=ffffff/official-t-shirt-of-the-freelancers-union-gaming-community.jpg"
-                                                    class="card-img-top" alt="Dress" />
+                                                    class="card-img-top" alt="Dress" loading="lazy" />
                                                 <div class="card-body">
                                                     <div class="d-flex justify-content-between">
-                                                        <p class="small"><a href="#!" class="text-muted">Dresses</a></p>
+                                                        <p class="small"><a href="#!" class="text-white-50">Dresses</a></p>
                                                     </div>
 
                                                     <div class="d-flex justify-content-between mb-3">
-                                                        <h5 class="text-dark mb-0">€36.99</h5>
+                                                        <h5 class="text-white mb-0">€36.99</h5>
                                                     </div>
                                                     <div class="d-flex justify-content-center mb-3">
                                                         <a class="btn custom-btn smoothscroll"
                                                             href="https://freelancers-union-gaming.myspreadshop.fi/freelancers+union-A5b97d9265fd3e423d700ac02?productType=2453&sellable=wQDLa1gaRvc9DBMDxyq3-2453-207&appearance=2&size=1"
-                                                            style="margin-top: 30px;" target="_blank">Buy</a>
+                                                            style="margin-top: 30px;" target="_blank" rel="noopener noreferrer">Buy</a>
                                                     </div>
 
                                                     <div class="d-flex justify-content-between mb-2">
@@ -429,6 +480,7 @@
 
                     </div>
                 </div>
+            </div>
         </section>
 
     </main>
@@ -446,20 +498,20 @@
                     <div class="col-lg-6 col-12 d-flex justify-content-lg-end align-items-center">
                         <ul class="social-icon d-flex justify-content-lg-end">
                             <li class="social-icon-item">
-                                <a href="https://discord.com/invite/axzCaZq" class="social-icon-link">
+                                <a href="https://discord.com/invite/axzCaZq" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Join us on Discord">
                                     <span class="bi-discord"></span>
                                 </a>
                             </li>
 
                             <li class="social-icon-item">
                                 <a href="https://invite.teamspeak.com/ts.fugaming.org/?password=futs"
-                                    class="social-icon-link">
+                                    class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Join us on TeamSpeak">
                                     <span class="bi-headset"></span>
                                 </a>
                             </li>
 
                             <li class="social-icon-item">
-                                <a href="https://www.youtube.com/@fugaming9505" class="social-icon-link">
+                                <a href="https://www.youtube.com/@fugaming9505" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Subscribe on YouTube">
                                     <span class="bi-youtube"></span>
                                 </a>
                             </li>
@@ -478,7 +530,7 @@
 
                     <ul class="site-footer-links">
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Home</a>
+                            <a href="#section_1" class="site-footer-link">Home</a>
                         </li>
 
                         <li class="site-footer-link-item">
@@ -490,15 +542,11 @@
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#section_4" class="site-footer-link">Schedule</a>
+                            <a href="#section_4" class="site-footer-link">Games</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#section_5" class="site-footer-link">Games</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#section_6" class="site-footer-link">Merch</a>
+                            <a href="#section_5" class="site-footer-link">Merch</a>
                         </li>
                     </ul>
                 </div>
@@ -511,12 +559,10 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-12 mt-5">
-                        <p class="copyright-text">Copyright © 2024 Freelancers Union</p>
+                        <p class="copyright-text">Copyright © <span id="copyright-year"></span> Freelancers Union</p>
                     </div>
-                    </ul>
                 </div>
             </div>
-        </div>
         </div>
     </footer>
 
@@ -530,10 +576,12 @@
     <!-- <script src="js/ts3.js"></script> -->
     <script src="js/localtime.js"></script>
     <script src="js/online-ps2.js"></script>
+    <script src="js/scroll-reveal.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
             updateLocalTime('ps2-local-time', '18:00');
             updateLocalTime('arma-local-time', '19:00');
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
             const onlineMembers = await getOnlineMembers();
             document.getElementById('outfit-count').textContent = onlineMembers;

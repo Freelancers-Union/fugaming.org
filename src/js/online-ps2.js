@@ -3,7 +3,10 @@ async function getOnlineMembers() {
     "https://census.daybreakgames.com/s:fuofficers/get/ps2:v2/outfit?outfit_id=37509488620602936&c:resolve=member_character&c:join=characters_online_status%5Eon:members.character_id%5Eto:character_id%5Einject_at:character_online_status";
 
   try {
-    const response = await fetch(url, { timeout: 5000 });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
